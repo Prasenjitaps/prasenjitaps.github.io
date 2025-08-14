@@ -6,69 +6,93 @@
     <title>Prasenjit — Visionary</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: #000;
+        color: #fff;
+        overflow-x: hidden;
+    }
+    header {
+        padding: 20px 40px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    nav a {
+        margin-left: 20px;
+        color: #ccc;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    nav a:hover {
+        color: #fff;
+    }
+    .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 20px;
+    }
+    .hero h1 {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+    .hero p {
+        font-size: 1.3rem;
+        color: #aaa;
+        max-width: 600px;
+    }
+    .btn {
+        margin-top: 30px;
+        padding: 15px 30px;
+        border: 1px solid #fff;
+        background: transparent;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .btn:hover {
+        background: #fff;
+        color: #000;
+    }
+    footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    /* 📱 Mobile Responsiveness */
+    @media (max-width: 768px) {
         header {
-            padding: 20px 40px;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            text-align: center;
         }
         nav a {
-            margin-left: 20px;
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #fff;
-        }
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
+            display: inline-block;
+            margin: 10px;
         }
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
         }
         .hero p {
-            font-size: 1.3rem;
-            color: #aaa;
-            max-width: 600px;
+            font-size: 1rem;
         }
         .btn {
-            margin-top: 30px;
-            padding: 15px 30px;
-            border: 1px solid #fff;
-            background: transparent;
-            color: #fff;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
         }
-        .btn:hover {
-            background: #fff;
-            color: #000;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
     <header>
