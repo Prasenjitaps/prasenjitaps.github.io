@@ -1,114 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Explore</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Explore · PJ’s Realm</title>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+  :root{
+    --bg-1:#0e0f12;
+    --bg-2:#111318;
+    --fg:#ffffff;
+    --muted:#b6bcc7;
+    --glow-1:#00ffe0;
+    --glow-2:#9b5cff;
+    --radius:26px;
+  }
 
-    .container {
-      display: flex;
-      gap: 30px;
-    }
+  /* ===== Page ===== */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--fg);
+    background:
+      radial-gradient(1200px 600px at 10% -10%, #1d2231 0%, transparent 60%),
+      radial-gradient(1000px 600px at 110% 110%, #1a1f2c 0%, transparent 55%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-2));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:48px 20px;
+  }
 
-    .card {
-      background: linear-gradient(145deg, #1e1e1e, #292929);
-      border-radius: 20px;
-      padding: 30px;
-      width: 200px;
-      height: 200px;
-      text-align: center;
-      cursor: pointer;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-      opacity: 0;
-      transform: scale(0.8);
-    }
+  .wrap{
+    width:min(1200px, 96vw);
+  }
 
-    /* Entry animation class */
-    .card.show {
-      animation: fadeInPop 0.6s ease forwards;
-    }
+  header{
+    text-align:center;
+    margin-bottom:28px;
+  }
+  header h1{
+    margin:0 0 10px;
+    font-size:clamp(28px, 5vw, 42px);
+    letter-spacing:.4px;
+  }
+  header p{
+    margin:0;
+    color:var(--muted);
+    font-size:clamp(14px, 2.2vw, 16px);
+  }
 
-    @keyframes fadeInPop {
-      0% {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
+  /* ===== Grid ===== */
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:26px;
+  }
+  @media (max-width: 900px){
+    .grid{grid-template-columns: repeat(2, 1fr);}
+  }
+  @media (max-width: 640px){
+    .grid{grid-template-columns: 1fr;}
+  }
 
-    .card:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-      border-color: rgba(255, 255, 255, 0.6);
-    }
+  /* ===== Card ===== */
+  .card{
+    position:relative;
+    isolation:isolate;
+    background:rgba(255,255,255,.04);
+    border-radius:var(--radius);
+    padding:28px 24px;
+    min-height: 340px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    cursor:pointer;
+    transform-style:preserve-3d;
+    will-change:transform, box-shadow;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, background .35s;
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow: 0 10px 30px rgba(0,0,0,.28);
+    overflow:hidden;
+  }
 
-    .icon {
-      font-size: 50px;
-      margin-bottom: 10px;
-    }
-  </style>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  /* gradient border with mask so center stays glassy */
+  .card::before{
+    content:"";
+    position:absolute; inset:0;
+    padding:1px;
+    border-radius:inherit;
+    background:linear-gradient(130deg, var(--glow-1), var(--glow-2));
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box, 
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity:.35;
+    transition:opacity .35s ease;
+    z-index:-1;
+  }
+
+  /* mouse light */
+  .card::after{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    left:var(--mx,50%);
+    top:var(--my,50%);
+    translate:-50% -50%;
+    background:radial-gradient(240px 240px at center,
+      rgba(255,255,255,.10), rgba(255,255,255,0) 60%);
+    filter:blur(2px);
+    opacity:.0;
+    transition:opacity .25s ease;
+    pointer-events:none;
+    z-index:-2;
+  }
+
+  .card:hover{
+    background:rgba(255,255,255,.055);
+    box-shadow: 0 30px 80px rgba(0,0,0,.45), 0 0 40px rgba(0,255,224,.12);
+  }
+  .card:hover::before{opacity:.85}
+  .card:hover::after{opacity:.9}
+
+  .icon{
+    font-size:64px;
+    line-height:1;
+    margin-bottom:14px;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,.45));
+    transform:translateZ(40px);
+  }
+  .card h2{
+    margin:6px 0 8px;
+    font-size:clamp(20px, 3.6vw, 26px);
+    transform:translateZ(30px);
+  }
+  .card p{
+    margin:0;
+    color:var(--muted);
+    max-width: 46ch;
+    line-height:1.6;
+    transform:translateZ(20px);
+    padding:0 6px;
+  }
+
+  /* ===== Entry reveal ===== */
+  .reveal{opacity:0; transform:translateY(26px) scale(.98)}
+  .reveal.show{opacity:1; transform:translateY(0) scale(1); transition:opacity .6s ease, transform .6s ease}
+
+  /* prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce){
+    .card, .reveal{transition:none !important; transform:none !important}
+    .card::after{display:none}
+  }
+
+  /* small top nav (optional) */
+  .topnav{
+    position:fixed; top:14px; left:50%; translate:-50% 0;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.1);
+    padding:8px 14px; border-radius:999px; font-size:14px; color:var(--muted);
+    backdrop-filter: blur(8px);
+  }
+  .topnav a{color:#e6e8ee; text-decoration:none; margin:0 10px; opacity:.8}
+  .topnav a:hover{opacity:1}
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <div class="icon"><i class="fas fa-book"></i></div>
-      <h3>Blogs</h3>
-    </div>
-    <div class="card">
-      <div class="icon"><i class="fas fa-images"></i></div>
-      <h3>Gallery</h3>
-    </div>
-    <div class="card">
-      <div class="icon"><i class="fas fa-paint-brush"></i></div>
-      <h3>Art</h3>
-      <div class="card" onclick="window.location.href='blogs.html'">
-    <i class="fas fa-pen-nib"></i>
-    <h3>Blogs</h3>
-    <p>Read and share stories, thoughts, and experiences.</p>
-</div>
-
-<div class="card" onclick="window.location.href='gallery.html'">
-    <i class="fas fa-images"></i>
-    <h3>Gallery</h3>
-    <p>Browse and enjoy a collection of stunning visuals.</p>
-</div>
-
-<div class="card" onclick="window.location.href='art.html'">
-    <i class="fas fa-paint-brush"></i>
-    <h3>Art</h3>
-    <p>Explore beautiful artworks and creative projects.</p>
-</div>
-
-    </div>
+  <div class="topnav">
+    <a href="index.html">Home</a> · <a href="about.html">About</a> · <strong>Explore</strong>
   </div>
 
-  <script>
-    // Animate cards on page load
-    window.addEventListener("load", () => {
-      const cards = document.querySelectorAll(".card");
-      cards.forEach((card, index) => {
-        setTimeout(() => {
-          card.classList.add("show");
-        }, index * 200); // stagger animation
-      });
+  <main class="wrap">
+    <header>
+      <h1>Explore</h1>
+      <p>Pick a lane. Each panel opens a different corner of PJ’s Realm.</p>
+    </header>
+
+    <section class="grid">
+      <!-- Blogs -->
+      <article class="card reveal" data-href="blogs.html" aria-label="Open Blogs">
+        <i class="ri-article-line icon" aria-hidden="true"></i>
+        <h2>Blogs</h2>
+        <p>Thoughts, essays, and narrative experiments from a medico-turned-literature major.</p>
+      </article>
+
+      <!-- Gallery -->
+      <article class="card reveal" data-href="gallery.html" aria-label="Open Gallery">
+        <i class="ri-gallery-line icon" aria-hidden="true"></i>
+        <h2>Gallery</h2>
+        <p>Visual diaries, study of light and texture, and snapshots that feel like memories.</p>
+      </article>
+
+      <!-- Art -->
+      <article class="card reveal" data-href="art.html" aria-label="Open Art">
+        <i class="ri-brush-line icon" aria-hidden="true"></i>
+        <h2>Art</h2>
+        <p>Sketches, digital paintings, and experiments — the playful side of obsession.</p>
+      </article>
+    </section>
+  </main>
+
+<script>
+  // ---- Helpers
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- 1) Staggered reveal on entry
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach((e)=>{
+      if(e.isIntersecting){
+        e.target.classList.add('show');
+        obs.unobserve(e.target);
+      }
     });
-  </script>
+  }, { threshold:.15 });
+
+  document.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transitionDelay = prefersReduced ? '0s' : `${i * 120}ms`;
+    obs.observe(el);
+  });
+
+  // ---- 2) Card click navigation
+  document.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      const href = card.getAttribute('data-href');
+      if(href) window.location.href = href;
+    });
+  });
+
+  // ---- 3) 3D tilt + mouse light (smoothed)
+  if(!prefersReduced){
+    const lerp = (a,b,t)=>a+(b-a)*t;
+
+    document.querySelectorAll('.card').forEach(card=>{
+      let rx=0, ry=0, tx=0, ty=0; // rotation and target rotation
+      let raf;
+
+      const animate=()=>{
+        rx = lerp(rx, tx, .12);
+        ry = lerp(ry, ty, .12);
+        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+        raf = requestAnimationFrame(animate);
+      };
+
+      const onMove = (e)=>{
+        const r = card.getBoundingClientRect();
+        const cx = e.clientX - r.left;
+        const cy = e.clientY - r.top;
+        const nx = (cx / r.width) * 2 - 1;   // -1..1
+        const ny = (cy / r.height) * 2 - 1;
+
+        ty = -nx * 10; // rotateY
+        tx = ny * 10;  // rotateX
+
+        // move the mouse light
+        card.style.setProperty('--mx', `${cx}px`);
+        card.style.setProperty('--my', `${cy}px`);
+      };
+
+      const onEnter=()=>{
+        cancelAnimationFrame(raf);
+        animate();
+        card.classList.add('hovered');
+      };
+      const onLeave=()=>{
+        cancelAnimationFrame(raf);
+        tx = ty = 0;
+        raf = requestAnimationFrame(animate);
+        setTimeout(()=>cancelAnimationFrame(raf), 260);
+        card.classList.remove('hovered');
+      };
+
+      card.addEventListener('mousemove', onMove);
+      card.addEventListener('mouseenter', onEnter);
+      card.addEventListener('mouseleave', onLeave);
+      // touch: small bounce
+      card.addEventListener('touchstart', ()=>card.style.transform='scale(1.03)', {passive:true});
+      card.addEventListener('touchend', ()=>card.style.transform='', {passive:true});
+    });
+  }
+</script>
 </body>
 </html>
