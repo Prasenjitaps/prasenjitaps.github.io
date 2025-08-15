@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore | PJ's Realm</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 50px 20px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+        text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        width: 100%;
+        max-width: 1000px;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 30px 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        backdrop-filter: blur(15px);
+        cursor: pointer;
+    }
+
+    .card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 10px 25px rgba(0, 255, 200, 0.4);
+        border-color: rgba(0, 255, 200, 0.8);
+    }
+
+    .icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+</style>
+</head>
+<body>
+
+<h1>Explore</h1>
+<div class="card-container">
+    <div class="card">
+        <span class="icon">📝</span>
+        <h2>Blogs</h2>
+        <p>Read stories, thoughts, and updates from our community.</p>
+    </div>
+
+    <div class="card">
+        <span class="icon">🖼️</span>
+        <h2>Gallery</h2>
+        <p>Browse our curated collection of stunning visuals.</p>
+    </div>
+
+    <div class="card">
+        <span class="icon">🎨</span>
+        <h2>Art</h2>
+        <p>Discover and appreciate beautiful artworks and creations.</p>
+    </div>
+</div>
+
+</body>
+</html>
