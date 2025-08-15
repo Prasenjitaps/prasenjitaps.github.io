@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Explore · PJ’s Realm</title>
@@ -170,6 +171,25 @@
   }
   .topnav a{color:#e6e8ee; text-decoration:none; margin:0 10px; opacity:.8}
   .topnav a:hover{opacity:1}
+  @media (max-width: 768px) {
+  .card {
+    flex: 1 1 100%;
+    margin: 10px 0;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 15px;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
 </style>
 </head>
 <body>
