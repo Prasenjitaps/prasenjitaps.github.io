@@ -3,168 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Explore | PJ's Realm</title>
+<title>Explore</title>
 <style>
     body {
-        margin: 0;
+        background-color: #0e0e0e;
         font-family: 'Segoe UI', sans-serif;
-        background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
         color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        display: flex;
+        gap: 30px;
+    }
+    .card {
+        background: linear-gradient(145deg, #1a1a1a, #121212);
+        border-radius: 20px;
+        width: 220px;
+        height: 280px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 50px 20px;
-    }
-
-    h1 {
-        font-size: 2.5rem;
-        margin-bottom: 40px;
-        text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
-
-    .card-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 25px;
-        width: 100%;
-        max-width: 1000px;
-    }
-
-    .card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        border-radius: 20px;
-        padding: 30px 20px;
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        backdrop-filter: blur(15px);
+        justify-content: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
         cursor: pointer;
     }
-
-    .card:hover {
-        transform: translateY(-10px) scale(1.05);
-        box-shadow: 0 10px 25px rgba(0, 255, 200, 0.4);
-        border-color: rgba(0, 255, 200, 0.8);
-    }
-
-    .icon {
-        font-size: 3rem;
+    .card-icon {
+        font-size: 50px;
         margin-bottom: 15px;
-        display: block;
     }
-
-    h2 {
-        font-size: 1.5rem;
-        margin-bottom: 10px;
+    .card h3 {
+        font-size: 1.4em;
+        margin: 0;
     }
-
-    p {
-        font-size: 0.95rem;
-        color: rgba(255, 255, 255, 0.7);
+    .glow {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
     }
-    .explore-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    padding: 40px;
-}
-
-.card {
-    width: 260px;
-    height: 360px; /* elongated */
-    background: rgba(255, 255, 255, 0.05); /* glass effect */
-    border-radius: 25px;
-    padding: 30px 20px;
-    text-align: center;
-    color: white;
-    backdrop-filter: blur(12px);
-    border: 2px solid transparent;
-    background-clip: padding-box;
-    transition: all 0.4s ease;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-/* Gradient border glow */
-.card::before {
-    content: "";
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border-radius: 25px;
-    padding: 2px;
-    background: linear-gradient(120deg, #00ffe0, #ff00d4);
-    z-index: -1;
-    transition: 0.4s;
-    opacity: 0.5;
-}
-
-.card:hover::before {
-    opacity: 1;
-}
-
-.card img {
-    width: 60px;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease;
-}
-
-.card:hover img {
-    transform: scale(1.15) rotate(5deg);
-}
-
-.card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
-
-.card p {
-    font-size: 0.95rem;
-    color: #ccc;
-}
-
-/* Hover effects */
-.card:hover {
-    transform: translateY(-12px) scale(1.05);
-    box-shadow: 0 8px 30px rgba(0, 255, 224, 0.4);
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .card {
-        width: 90%;
-        height: auto;
-    }
-}
-
 </style>
+<!-- Minimal Icons via RemixIcon -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
 
-<h1>Explore</h1>
-<div class="card-container">
-    <div class="card">
-        <span class="icon">📝</span>
-        <h2>Blogs</h2>
-        <p>Read stories, thoughts, and updates from our community.</p>
+<div class="container">
+    <div class="card" data-title="Blogs">
+        <div class="glow"></div>
+        <i class="ri-article-line card-icon"></i>
+        <h3>Blogs</h3>
     </div>
-
-    <div class="card">
-        <span class="icon">🖼️</span>
-        <h2>Gallery</h2>
-        <p>Browse our curated collection of stunning visuals.</p>
+    <div class="card" data-title="Gallery">
+        <div class="glow"></div>
+        <i class="ri-gallery-line card-icon"></i>
+        <h3>Gallery</h3>
     </div>
-
-    <div class="card">
-        <span class="icon">🎨</span>
-        <h2>Art</h2>
-        <p>Discover and appreciate beautiful artworks and creations.</p>
+    <div class="card" data-title="Art">
+        <div class="glow"></div>
+        <i class="ri-brush-line card-icon"></i>
+        <h3>Art</h3>
     </div>
 </div>
+
+<script>
+    document.querySelectorAll('.card').forEach(card => {
+        const glow = card.querySelector('.glow');
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            glow.style.left = `${x - rect.width / 2}px`;
+            glow.style.top = `${y - rect.height / 2}px`;
+            glow.style.opacity = 1;
+        });
+        card.addEventListener('mouseleave', () => {
+            glow.style.opacity = 0;
+            card.style.transform = 'scale(1) rotateX(0) rotateY(0)';
+            card.style.boxShadow = 'none';
+            card.style.border = '2px solid transparent';
+        });
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'scale(1.08)';
+            card.style.boxShadow = '0 15px 35px rgba(0, 255, 200, 0.3)';
+            card.style.border = '2px solid rgba(0, 255, 200, 0.7)';
+        });
+    });
+</script>
 
 </body>
 </html>
