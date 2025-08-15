@@ -1,0 +1,14 @@
+[
+  {
+    "title": "My First Blog Post",
+    "date": "2025-08-15",
+    "image": "images/blog1.jpg",
+    "content": "This is the content of my very first blog post. You can write anything here — HTML supported!"
+  },
+  {
+    "title": "Second Post: Creative Journey",
+    "date": "2025-08-16",
+    "image": "images/blog2.jpg",
+    "content": "In this post, I talk about my creative process and share some artwork."
+  }
+]
